@@ -1,6 +1,6 @@
 <div align="center">
 
-<img width="100%" src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=0,1,2&height=150&section=header&text=Bilal%20Rukundi&fontSize=40&fontColor=ffffff&animation=fadeIn&fontAlignY=50"/>
+<h1>HI! I'm Bilal</h1>
 
 <!-- Professional Tagline -->
 <h2>AI & Machine Learning Innovator | Crafting Intelligent Solutions</h2>
@@ -18,7 +18,7 @@
 
 ### 👨‍💻 About Me
 
-I’m **Bilal Rukundi**, a passionate AI & Machine Learning student dedicated to transforming data into intelligent, impactful solutions. With a strong foundation in mathematics, statistics, and cutting-edge ML frameworks, I specialize in deep learning, computer vision, and natural language processing (NLP). My mission is to bridge theoretical AI research with real-world applications, creating scalable and innovative systems that solve meaningful problems.
+Well, Hi again, I’m **Bilal Rukundi**, a passionate AI & Machine Learning student dedicated to transforming data into intelligent, impactful solutions. With a strong foundation in mathematics, statistics, and cutting-edge ML frameworks, I specialize in deep learning, computer vision, and natural language processing (NLP). My mission is to bridge theoretical AI research with real-world applications, creating scalable and innovative systems that solve meaningful problems.
 
 🔑 **What Drives Me:**
 - Exploring advanced deep learning architectures and transformer models
@@ -182,8 +182,6 @@ Reach out via [LinkedIn](https://linkedin.com/in/bilal-rukundi) or [email](mailt
 <div align="center">
 
 **Building intelligent systems, one algorithm at a time.**  
-[GitHub](https://github.com/Wayn-Git) | [Portfolio](https://github.com/Wayn-Git/React_Portfolio_Web)
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=100&section=footer"/>
+[GitHub](https://github.com/Wayn-Git) | [Portfolio](bilall.is-a.dev)
 
 </div>
