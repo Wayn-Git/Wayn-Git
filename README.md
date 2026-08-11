@@ -1,59 +1,22 @@
-# wayn-git
+# Hi 👋, I'm Bilal Rukundi
 
-> Memorable developer positioning.
+### A seasoned Jupyter notebook developer
 
-**Theme:** Satan Â· **Style:** Creative Â· **Agent:** Full-Stack Engineer
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=Wayn-Git&label=Profile views&color=0e75b6&style=flat" alt="Wayn-Git" /> </p>
 
-## Header
-> Editing this section in the inspector.
-Hi, I'm **wayn-git**. This README is tuned for **personal brand** with a Satan visual system.
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: light)" srcset="https://www.gitskins.com/api/section/hero?username=wayn-git&theme=satan&mode=light" />
-    <img src="https://www.gitskins.com/api/section/hero?username=wayn-git&theme=satan" alt="wayn-git hero section" />
-  </picture>
-</p>
-## About Me
-Shapes the short profile story and positioning.
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: light)" srcset="https://www.gitskins.com/api/section/about?username=wayn-git&theme=satan&mode=light" />
-    <img src="https://www.gitskins.com/api/section/about?username=wayn-git&theme=satan" alt="wayn-git about section" />
-  </picture>
-</p>
-## Skills
-Selected stack and skill badges will be generated from the GitHub profile and README strategy.
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: light)" srcset="https://www.gitskins.com/api/section/stack?username=wayn-git&theme=satan&mode=light" />
-    <img src="https://www.gitskins.com/api/section/stack?username=wayn-git&theme=satan" alt="wayn-git stack section" />
-  </picture>
-</p>
-## GitHub Stats
-GitSkins stat widgets will use the **Satan** theme.
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: light)" srcset="https://www.gitskins.com/api/section/stats?username=wayn-git&theme=satan&mode=light" />
-    <img src="https://www.gitskins.com/api/section/stats?username=wayn-git&theme=satan" alt="wayn-git stats section" />
-  </picture>
-</p>
-## Projects
-Highlights repositories as proof of work.
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: light)" srcset="https://www.gitskins.com/api/section/projects?username=wayn-git&theme=satan&mode=light" />
-    <img src="https://www.gitskins.com/api/section/projects?username=wayn-git&theme=satan" alt="wayn-git projects section" />
-  </picture>
-</p>
-## Heatmap
-Animated year-long contribution calendar.
-## Connect
-Contact and social links will appear here.
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: light)" srcset="https://www.gitskins.com/api/section/social?username=wayn-git&theme=satan&mode=light" />
-    <img src="https://www.gitskins.com/api/section/social?username=wayn-git&theme=satan" alt="wayn-git social section" />
-  </picture>
+- 📝 I regularly write articles on **[https://bilal-eu.dedyn.io/](https://bilal-eu.dedyn.io/)**
+
+<h3 align="left">Connect with me:</h3>
+<p align="left">
+<a href="https://github.com/Wayn-Git" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/github.svg" alt="Wayn-Git" height="30" width="40" /></a>
 </p>
 
-<!-- Sections: Header, About Me, Skills, GitHub Stats, Projects, Heatmap, Connect -->
+<h3 align="left">Languages and Tools:</h3>
+<p align="left"> <a href="https://developer.mozilla.org/en-US/docs/Web/css3" target="_blank" rel="noreferrer"> <img src="https://skillicons.dev/icons?i=css" alt="css3" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/django" target="_blank" rel="noreferrer"> <img src="https://skillicons.dev/icons?i=django" alt="django" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/express" target="_blank" rel="noreferrer"> <img src="https://skillicons.dev/icons?i=express" alt="express" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/flask" target="_blank" rel="noreferrer"> <img src="https://skillicons.dev/icons?i=flask" alt="flask" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/html5" target="_blank" rel="noreferrer"> <img src="https://skillicons.dev/icons?i=html" alt="html5" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/javascript" target="_blank" rel="noreferrer"> <img src="https://skillicons.dev/icons?i=js" alt="javascript" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/nodejs" target="_blank" rel="noreferrer"> <img src="https://skillicons.dev/icons?i=nodejs" alt="nodejs" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/python" target="_blank" rel="noreferrer"> <img src="https://skillicons.dev/icons?i=py" alt="python" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/react" target="_blank" rel="noreferrer"> <img src="https://skillicons.dev/icons?i=react" alt="react" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/sass" target="_blank" rel="noreferrer"> <img src="https://skillicons.dev/icons?i=sass" alt="sass" width="40" height="40"/> </a></p>
+
+<p><img align="left" src="https://github-readme-stats.vercel.app/api/top-langs?username=Wayn-Git&show_icons=true&locale=en&layout=compact" alt="Wayn-Git" /></p>
+
+<p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=Wayn-Git&show_icons=true&locale=en" alt="Wayn-Git" /></p>
+
+<p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=Wayn-Git&" alt="Wayn-Git" /></p>
+
