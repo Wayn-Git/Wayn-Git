@@ -4,12 +4,6 @@ wayn-git
   <img src="https://www.gitskins.com/api/section/hero?username=wayn-git&theme=satan" alt="wayn-git" />
 </p>About Me
 
-I'm wayn-git, a full-stack engineer who likes building things that feel a little different.
-
-I work across AI/ML, backend systems, automation, and modern web applications, with a focus on turning ambitious ideas into working software.
-
-I enjoy digging into systems, experimenting with new technologies, and building projects that are useful beyond a demo.
-
 <p align="center">
   <img src="https://www.gitskins.com/api/section/about?username=wayn-git&theme=satan" alt="About wayn-git" />
 </p>Stack
