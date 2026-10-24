@@ -1,72 +1,71 @@
-<p align="center">
-  <img src="https://www.gitskins.com/api/section/wordmark?username=wayn-git&theme=github-dark&label=Bilal%20Rukundi" width="100%" alt="Bilal Rukundi" />
-</p>
+<h1 align="center">hey, i'm bilal</h1>
 
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: light)" srcset="https://www.gitskins.com/api/section/hero?username=wayn-git&theme=github-dark&mode=light" />
-    <img src="https://www.gitskins.com/api/section/hero?username=wayn-git&theme=github-dark&mode=dark" width="100%" alt="Bilal Rukundi — profile" />
-  </picture>
+student in india &nbsp;·&nbsp; building with LLMs, agents and retrieval &nbsp;·&nbsp; learns by breaking things
 </p>
+
+```text
+bilal@amethyst
+──────────────
+os         CachyOS, GNOME on Wayland
+shell      fish
+machine    Acer Nitro · i7-13620H · RTX 4050 · 16 GB
+writes     python, typescript
+building   amethyst · gpt-from-scratch · sif
+reading    KV caches, batching, how inference actually gets served
+likes      PC games, linux tinkering, well-spaced UIs
+```
+
+I'd rather know how a thing works than just call its API. Most of what's below started as "wait, how does that actually work?" and ended up as a repo.
+
+## what I'm building
+
+<table>
+<tr>
+<td width="33%" valign="top">
+
+**[Amethyst](https://github.com/Wayn-Git/Amethyst)**<br>
+Open-source, local-first personal AI OS. Your notes sit in a markdown vault on your machine and an agent works on top of them. FastAPI, React, SQLite, MCP. Team of four, I do the core engineering.
+
+</td>
+<td width="33%" valign="top">
+
+**[GPT from Scratch](YOUR-REPO-LINK)**<br>
+A GPT-style model in PyTorch, written to understand it rather than use it. Tokenizer, attention, transformer blocks, generation. Now poking at KV caching and batching.
+
+</td>
+<td width="33%" valign="top">
+
+**[SIF](YOUR-REPO-LINK)**<br>
+Hybrid retrieval for RAG. Dense search for meaning, keyword search for exact terms, merged with Reciprocal Rank Fusion, then reranked. Vector search alone misses the obvious stuff.
+
+</td>
+</tr>
+</table>
+
+## what's in my ears
 
 <p align="center">
-  <a href="https://github.com/wayn-git">GitHub</a> &nbsp;·&nbsp;
-  <a href="https://bilal-eu.dedyn.io/">Website</a>
-  <!-- add more, e.g: &nbsp;·&nbsp; <a href="mailto:you@example.com">Email</a> -->
+<img src="https://raw.githubusercontent.com/Wayn-Git/Wayn-Git/output/music.svg" alt="What I'm listening to right now, plus my top tracks from the past year, six months and month" width="100%">
 </p>
 
-<!-- Short bio — replace with your own line or two -->
-<p align="center">
-  Building small, focused tools — currently exploring generative audio and creative coding.
-</p>
+<p align="center"><sub>
+refreshed by a GitHub Action every so often, so it's never quite live. idea from <a href="https://github.com/andyruwruw">andyruwruw</a>, who got it from <a href="https://github.com/natemoo-re">natemoo-re</a>
+</sub></p>
 
-<p align="center">
-  <img src="https://www.gitskins.com/api/section/highlights?username=wayn-git&theme=github-dark&items=Python%3A%3A55%20public%20repositories%7CUrban-Sound-Narrative-Generator%3A%3AUrban%20Sound%20Narrative%20Generator%20is%20a%20fun%20proje%7CImpact%3A%3A29%20stars%20%C2%B7%20224%20active%20days" width="100%" alt="Highlights" />
-</p>
+## stuff I've done
 
-<br />
+- **AI/ML intern at DeepSurg AI**: surgical video analysis (laparoscopic and endoscopic) with PyTorch, annotating data, checking results against actual surgical validation
+- **President of Intellix AI Club**
+- **3rd place, Best AI Tool** at RITECH 2K25
 
-## The year, so far
+## opinions nobody asked for
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: light)" srcset="https://www.gitskins.com/api/section/heatmap?username=wayn-git&theme=github-dark&style=jet&mode=light" />
-    <img src="https://www.gitskins.com/api/section/heatmap?username=wayn-git&theme=github-dark&style=jet&mode=dark" width="100%" alt="678 contributions in the last year" />
-  </picture>
-</p>
+- Not everything needs a gradient
+- Glowing blobs are not a personality
+- If setup needs fourteen env vars, setup is the bug
+- I should be able to explain my code without an AI bailing me out (working on it)
 
-<br />
+## say hi
 
-## Signal
-
-<p align="center">
-  <img src="https://www.gitskins.com/api/section/stats?username=wayn-git&theme=github-dark" width="100%" alt="29 stars across 55 repositories" />
-</p>
-
-<p align="center">
-  <img src="https://www.gitskins.com/api/section/stack?username=wayn-git&theme=github-dark" width="100%" alt="Language stack" />
-</p>
-
-<br />
-
-## Work
-
-<p align="center">
-  <img src="https://www.gitskins.com/api/section/projects?username=wayn-git&theme=github-dark" width="100%" alt="Pinned projects" />
-</p>
-
-<p align="center"><sub>See more on <a href="https://github.com/wayn-git?tab=repositories">the full repo list →</a></sub></p>
-
-<br />
-
-## Profile scan
-
-<p align="center">
-  <img src="https://www.gitskins.com/api/section/system-scan?username=wayn-git&theme=github-dark" width="100%" alt="ASCII profile scan" />
-</p>
-
-<hr />
-
-<p align="center">
-  <sub>Bilal Rukundi · every panel is a single <code>&lt;img&gt;</code> of live GitHub data ·
-</p>
+[email](mailto:YOUR-EMAIL) &nbsp;·&nbsp; [LinkedIn](YOUR-LINKEDIN)
