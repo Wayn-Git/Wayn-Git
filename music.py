@@ -6,10 +6,13 @@ Renders the "what's in my ears" card for a GitHub profile README as one SVG.
     equalizer that only moves while something is actually playing
   - below: three columns of top tracks (past year / past 6 months / past month)
 
-Standard library only. Uses Last.fm:
-  LASTFM_API_KEY and LASTFM_USER (free, no Premium, no OAuth).
+Standard library only. Two data sources:
 
-Try it without credentials:   python3 scripts/music.py --demo
+  Spotify  needs SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN
+           (get the refresh token once with scripts/get_spotify_token.py)
+  Last.fm  needs LASTFM_API_KEY and LASTFM_USER (free, no Premium, no OAuth)
+
+Try it without any credentials:   python3 scripts/music.py --demo
 """
 import argparse
 import base64
@@ -33,8 +36,8 @@ NOW_W, NOW_H, NOW_Y = 300, 64, 26
 COLS_Y = 138           # y of first track card
 H = COLS_Y + 5 * CARD_H + 4 * CARD_GAP + 10
 
-LIGHT = dict(fg="#1f2328", dim="#656d76", ac="#7c6ae6")
-DARK = dict(fg="#e6edf3", dim="#8b949e", ac="#a89bff")
+LIGHT = dict(fg="#2a2620", dim="#6f675a", ac="#c96a00", cf="rgba(128,128,128,.08)", cs="rgba(128,128,128,.32)")
+DARK = dict(fg="#e9e2d3", dim="#8d8576", ac="#ffa826", cf="#191613", cs="#2c2721")
 
 
 # ------------------------------------------------------------------ http ----
@@ -67,6 +70,67 @@ def fetch_art(url, cache):
         print(f"art failed ({e}): {url}", file=sys.stderr)
     cache[url] = uri
     return uri
+
+
+# --------------------------------------------------------------- spotify ----
+def spotify():
+    cid = os.environ["SPOTIFY_CLIENT_ID"]
+    secret = os.environ["SPOTIFY_CLIENT_SECRET"]
+    refresh = os.environ["SPOTIFY_REFRESH_TOKEN"]
+    basic = base64.b64encode(f"{cid}:{secret}".encode()).decode()
+    tok = http_json(
+        "https://accounts.spotify.com/api/token",
+        headers={
+            "Authorization": f"Basic {basic}",
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        data=urllib.parse.urlencode(
+            {"grant_type": "refresh_token", "refresh_token": refresh}
+        ).encode(),
+    )
+    auth = {"Authorization": f"Bearer {tok['access_token']}"}
+    api = "https://api.spotify.com/v1"
+
+    def cover(item):
+        imgs = [i for i in (item.get("album") or {}).get("images") or [] if i.get("url")]
+        imgs.sort(key=lambda i: i.get("width") or 0)
+        for i in imgs:  # smallest cover that is still >= 64px
+            if (i.get("width") or 0) >= 64:
+                return i["url"]
+        return imgs[-1]["url"] if imgs else None
+
+    def track(item):
+        return {
+            "title": item["name"],
+            "artist": ", ".join(a["name"] for a in item.get("artists", [])),
+            "art_url": cover(item),
+        }
+
+    now = None
+    cur = http_json(f"{api}/me/player/currently-playing", headers=auth)
+    item = (cur or {}).get("item")
+    if item and item.get("type") == "track":
+        now = track(item)
+        now["playing"] = bool(cur.get("is_playing"))
+        dur = item.get("duration_ms") or 0
+        now["progress"] = (cur.get("progress_ms") or 0) / dur if dur else None
+    if not now:
+        rec = http_json(f"{api}/me/player/recently-played?limit=1", headers=auth)
+        items = (rec or {}).get("items") or []
+        if items:
+            now = track(items[0]["track"])
+            now["playing"], now["progress"] = False, None
+
+    def top(rng):
+        d = http_json(f"{api}/me/top/tracks?time_range={rng}&limit=5", headers=auth)
+        return [track(i) for i in (d or {}).get("items", [])]
+
+    cols = [
+        ("past year", top("long_term")),
+        ("past 6 months", top("medium_term")),
+        ("past month", top("short_term")),
+    ]
+    return now, cols
 
 
 # ---------------------------------------------------------------- last.fm ----
@@ -163,27 +227,8 @@ def demo():
 
 # ------------------------------------------------------------------- svg ----
 def est(text, size, bold=False):
-    """Rough text width in px. SVG can't measure text, so we guess and also clip."""
-    w = 0.0
-    for c in text:
-        if c in "ijl.,:;'!|`":
-            f = 0.27
-        elif c in "ftr()[]{}-/ \"":
-            f = 0.36
-        elif c in "mw":
-            f = 0.82
-        elif c in "MW@%":
-            f = 0.95
-        elif c.isupper():
-            f = 0.68
-        elif c.isdigit():
-            f = 0.56
-        elif ord(c) > 0x2E80:
-            f = 1.0
-        else:
-            f = 0.54
-        w += f
-    return w * size * (1.06 if bold else 1.0)
+    """Text width in px. The card is set in a monospace font, so it is just length x 0.6em."""
+    return len(text) * size * 0.6
 
 
 def fit(text, max_w, size, bold=False):
@@ -196,7 +241,8 @@ def fit(text, max_w, size, bold=False):
 
 def css(theme):
     def block(p):
-        return f".t{{fill:{p['fg']}}}.a,.h{{fill:{p['dim']}}}.ac{{fill:{p['ac']}}}"
+        return (f".t{{fill:{p['fg']}}}.a,.h{{fill:{p['dim']}}}.ac{{fill:{p['ac']}}}"
+                f".cd{{fill:{p['cf']};stroke:{p['cs']}}}")
 
     if theme == "light":
         colors = block(LIGHT)
@@ -205,7 +251,7 @@ def css(theme):
     else:
         colors = block(LIGHT) + "@media (prefers-color-scheme:dark){" + block(DARK) + "}"
     return (
-        'text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif}'
+        'text{font-family:ui-monospace,SFMono-Regular,"JetBrains Mono","Cascadia Mono",Menlo,Consolas,"DejaVu Sans Mono","Liberation Mono",monospace}'
         ".t{font-size:13px;font-weight:600}.a{font-size:12px}.h{font-size:12px;letter-spacing:.03em}"
         ".n{font-size:14px;font-weight:600}"
         ".bar{transform-box:fill-box}.bl{transform-origin:100% 50%}.br{transform-origin:0% 50%}"
@@ -233,8 +279,7 @@ def card(x, y, tr):
     artist = escape(fit(tr["artist"], 184, 12))
     return (
         f'<g transform="translate({x},{y})">'
-        f'<rect width="{COL_W}" height="{CARD_H}" rx="6" fill="#808080" fill-opacity=".07" '
-        f'stroke="#808080" stroke-opacity=".3"/>'
+        f'<rect width="{COL_W}" height="{CARD_H}" rx="4" class="cd"/>'
         f'<g transform="translate(6,6)">{cover(tr.get("art"), ART, "ca")}</g>'
         f'<g transform="translate(56,0)"><g clip-path="url(#ct)">'
         f'<text class="t" y="23">{title}</text><text class="a" y="40">{artist}</text>'
@@ -242,15 +287,17 @@ def card(x, y, tr):
     )
 
 
-def build_svg(now, cols, theme="auto"):
+def build_svg(now, cols, theme="auto", panel=False):
     now = now or {"title": "nothing yet", "artist": "play something", "art": None,
                   "playing": False, "progress": None}
     playing = bool(now.get("playing"))
     nx = (W - NOW_W) // 2
     cy = NOW_Y + NOW_H / 2
+    pad = 28 if panel else 0
+    TW, TH = W + 2 * pad, H + 2 * pad
     out = [
         f'<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
-        f'width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img">',
+        f'width="{TW}" height="{TH}" viewBox="0 0 {TW} {TH}" role="img">',
         f'<title>{"Playing now" if playing else "Last played"}: {escape(now["title"])} by {escape(now["artist"])}</title>',
         f"<style>{css(theme)}</style>",
         "<defs>"
@@ -259,8 +306,11 @@ def build_svg(now, cols, theme="auto"):
         f'<clipPath id="ct"><rect width="184" height="{CARD_H}"/></clipPath>'
         f'<clipPath id="cn"><rect width="224" height="{NOW_H}"/></clipPath>'
         "</defs>",
-        f'<text class="h" x="{W / 2}" y="14" text-anchor="middle">{"playing now" if playing else "last played"}</text>',
     ]
+    if panel:
+        out.append(f'<rect x=".5" y=".5" width="{TW - 1}" height="{TH - 1}" rx="6" fill="#12100e" stroke="#2c2721"/>')
+    out.append(f'<g transform="translate({pad},{pad})">')
+    out.append(f'<text class="h" x="{W / 2}" y="14" text-anchor="middle">{"playing now" if playing else "last played"}</text>')
 
     # equalizer bars, mirrored either side of the now-playing card
     lens_left, lens_right = (110, 70, 92), (92, 70, 110)
@@ -275,8 +325,7 @@ def build_svg(now, cols, theme="auto"):
     # now playing card
     out.append(
         f'<g transform="translate({nx},{NOW_Y})">'
-        f'<rect width="{NOW_W}" height="{NOW_H}" rx="6" fill="#808080" fill-opacity=".07" '
-        f'stroke="#808080" stroke-opacity=".3"/>'
+        f'<rect width="{NOW_W}" height="{NOW_H}" rx="4" class="cd"/>'
         f'<g transform="translate(8,8)">{cover(now.get("art"), 48, "cb")}</g>'
         f'<g transform="translate(66,0)"><g clip-path="url(#cn)">'
         f'<text class="n t" y="27">{escape(fit(now["title"], 224, 14, True))}</text>'
@@ -296,7 +345,7 @@ def build_svg(now, cols, theme="auto"):
         for ri, tr in enumerate(tracks[:5]):
             out.append(card(x, COLS_Y + ri * (CARD_H + CARD_GAP), tr))
 
-    out.append("</svg>")
+    out.append("</g></svg>")
     return "".join(out)
 
 
@@ -305,6 +354,8 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--out", default="music.svg")
     ap.add_argument("--demo", action="store_true", help="render fake data, no credentials needed")
+    ap.add_argument("--provider", choices=["auto", "spotify", "lastfm"], default="auto")
+    ap.add_argument("--panel", action="store_true", help="draw a dark card behind everything (use with --theme dark)")
     ap.add_argument("--theme", choices=["auto", "light", "dark"], default="auto",
                     help="auto follows the viewer's light/dark setting")
     a = ap.parse_args()
@@ -312,19 +363,22 @@ def main():
     if a.demo:
         now, cols = demo()
     else:
-        if not os.environ.get("LASTFM_API_KEY") or not os.environ.get("LASTFM_USER"):
-            sys.exit(
-                "Missing Last.fm credentials. Set LASTFM_API_KEY and LASTFM_USER, "
-                "or try --demo."
-            )
-        now, cols = lastfm()
+        provider = a.provider
+        if provider == "auto":
+            if os.environ.get("SPOTIFY_REFRESH_TOKEN"):
+                provider = "spotify"
+            elif os.environ.get("LASTFM_API_KEY"):
+                provider = "lastfm"
+            else:
+                sys.exit("No credentials found. Set the Spotify or Last.fm variables (see top of file), or try --demo.")
+        now, cols = spotify() if provider == "spotify" else lastfm()
         cache = {}
         for t in ([now] if now else []) + [t for _, ts in cols for t in ts]:
             t["art"] = fetch_art(t.pop("art_url", None), cache)
 
     os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
     with open(a.out, "w", encoding="utf-8") as f:
-        f.write(build_svg(now, cols, a.theme))
+        f.write(build_svg(now, cols, a.theme, a.panel))
     print(f"wrote {a.out} ({os.path.getsize(a.out) / 1024:.0f} KB)")
 
 
